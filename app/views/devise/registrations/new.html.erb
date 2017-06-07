@@ -1,0 +1,39 @@
+<div class="container" style="margin-top: 200px; border:1px solid #eee">
+
+<h2 class="text-center">회원가입</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="input-group">
+	  <span class="input-group-addon" style="padding-right: 60px;">이메일</span>
+	  <%= f.email_field :email, autofocus: true, class:"form-control", placeholder: "dongguk@dgu.edu" %>
+	</div><br />
+  <div class="input-group">
+	  <span class="input-group-addon" style="padding-right: 40px;">비밀번호</span>
+    <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder: "6자리 이상의 비밀번호를 입력해주세요" %>
+	</div><br />
+  
+  <div class="input-group">
+	  <span class="input-group-addon">비밀번호 확인</span>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control  ", placeholder: "위 비밀번호와 동일한 비밀번호를 입력해주세요" %>
+	</div><br />
+  <div class="input-group">
+	  <span class="input-group-addon" style="padding-right: 70px;">이름</span>
+    <%= f.text_field :name, autocomplete: "off", class:"form-control", placeholder: "홍길동" %>
+	</div><br />
+  <div class="input-group">
+	  <span class="input-group-addon" style="padding-right: 40px;">전화번호</span>
+    <%= f.text_field :phonenumber, autocomplete: "off", class:"form-control", placeholder: "01022223333" %>
+	</div><br />
+  <div class="row text-center">
+    <div class="actions col-md-6">
+      <%= f.submit "가입완료", class: "btn btn-xl" %>
+    </div>
+    <div class="g-mb-20 col-md-6">
+      <%= link_to "로그인", new_session_path(resource_name), class: "btn btn-xl" %>
+    </div>
+  </div><br/>
+<% end %>
+
+</div>

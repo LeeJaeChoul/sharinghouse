@@ -1,0 +1,26 @@
+<div class="container" id="portfolio" style="margin-top: 200px">
+  <div class="row" style="margin-bottom: 50px;">
+    <div class="col-lg-12 text-center">
+      <h2 class="section-heading">방 보러가기</h2><br>
+      <h3 class="section-subheading text-muted">자세한 내용을 보고 싶으시면 아래 방을 클릭하세요.</h3>
+    </div>
+  </div>
+  <div class="row">
+    <% @rooms.each do |room| %>
+    <div class="col-md-4 col-sm-6 portfolio-item">
+      <a href="/rooms/<%= room.id %>" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                  <i class="fa fa-search-plus fa-3x"></i>
+              </div>
+          </div>
+          <img class="img-responsive" src="<%= room.image.url %>" alt="" style="width:360px; height:200px;">
+      </a>
+      <div class="portfolio-caption">
+          <h4><%= room.title %></h4>
+          <p class="text-muted">보증금: <%= room.deposit %>만원, 월세: <%= room.rent_money %>만원</p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

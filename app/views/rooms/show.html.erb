@@ -1,0 +1,75 @@
+<div class="container">
+	<div class="row" style="margin-top: 100px;">
+	  <div><h1>방 자세히 보기</h1><hr></div>
+		<div class="col-md-6">
+		  <img class="img-responsive" style="width:100%; height:350px;" src = "<%= @room.image.url %>" alt="">
+		</div>
+
+		<div class="col-md-6">
+			<div class="product-name">
+				<h1><b><%= @room.title %></b></h1>
+			</div>
+
+			<p><%= @room.detail %></p><br />
+      <div class="g-mb-40">
+				<p><i class="fa fa-check-square-o" aria-hidden="true"></i> 방 올린사람 : <b><%= @room.user.name %></b></p>
+				<p><i class="fa fa-check-square-o" aria-hidden="true"></i> 제 목 : <b><%= @room.title %></b></p>
+				<p><i class="fa fa-check-square-o" aria-hidden="true"></i> 방 유형 : <b><%= @room.roomtype %></b></p>
+				<p><i class="fa fa-check-square-o" aria-hidden="true"></i> 주 소: <b><%= @room.address %></b></p>
+				<p><i class="fa fa-check-square-o" aria-hidden="true"></i> 보증금 : <b><%= @room.deposit %>만원</b></p>
+				<p><i class="fa fa-check-square-o" aria-hidden="true"></i> 월 세 : <b><%= @room.rent_money %>만원</b></p>
+			</div>
+		</div>
+		<div style="text-align: right;">
+			<% if current_user.id == @room.user_id %>
+      	<%= link_to '삭제', @room, method: :delete, data:{confirm: "Are you sure?" }, class: "btn btn-xl" %>
+      	<%= link_to '수정', edit_room_path(@room), class: "btn btn-xl" %>
+    	<% end %>
+		  <%= link_to '돌아가기', rooms_path, class: "btn btn-xl" %>
+		</div>
+	</div>
+	<h3>댓 글</h3><hr>
+  <% @room.comments.each do |comment| %>
+    <div class="row" style="vertical-align: middle;">
+      <div class="col-md-1">
+	      <strong><i class="fa fa-user fa-4x" aria-hidden="true"></i></strong>
+	      <p><%= comment.name %></p>
+      </div>
+      <div class="col-md-9">
+      	<strong><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i></strong>
+      	<%= comment.body %>
+    	</div>
+    	<div class="col-md-2">
+    		<%= time_ago_in_words(comment.created_at) %>  / 
+    		<% if current_user.name == comment.name %>
+    			<strong><%= link_to '삭제하기', [comment.room, comment], method: :delete, data: { confirm: 'Are you sure?'} %></strong>
+    		<% end %>
+    	</div>
+    </div>
+  <% end %><hr>
+	
+	<h3>댓 글 작 성</h3>
+	<% if current_user.nil? %>
+		<div class="row" style="margin-bottom: 100px;">
+			<h2>로그인 후 이용해주세요.</h2>
+		</div>
+	<% else %>
+	  <%= form_for([@room, @room.comments.build]) do |f| %>
+	    <div class="row" style="vertical-align: middle; margin-bottom:100px;">
+	    	<div class="col-md-3">
+	      	<%= f.label :'작성자' %> :
+	      	<%= f.text_field :name %> 
+	    	</div>
+		    <div class="col-md-7">
+	      	<%= f.text_area :body, :maxlength=>"200", :rows =>"3", :cols =>"80", placeholder: "200자이내로 댓글을 작성해 주세요" %>
+		    </div>
+		    <div class="col-md-2">
+	      	<%= f.submit "댓글달기", class: "btn btn-xl" %>
+		    </div>
+	    </div>
+	  <% end %> 
+  <% end %>
+</div>
+
+
+

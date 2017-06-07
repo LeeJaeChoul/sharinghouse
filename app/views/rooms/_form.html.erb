@@ -1,0 +1,66 @@
+<%= form_for(@room) do |f| %>
+  <% if @room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+      <% @room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row text-center" style="margin-top:200px;">
+	  <div class="col-md-10 col-md-offset-1 border-box">
+		<h2>매물 등록하기</h2>
+			<label class="input login-input g-mt-20">
+	      <div class="input-group">
+	      	<span class="input-group-addon" style="padding-right: 30px;">제 목</span>
+	      	<%= f.text_field :title, class: "form-control", placeholder: "ex)후문 앞 깨끗한 원룸" %>
+	    	</div>
+	  	</label>
+	  	<label class="input login-input g-mt-20">
+	      <div class="input-group">
+	      	<span class="input-group-addon"style="padding-right: 20px;">방 유형</span>
+	      	<%= f.text_field :roomtype, class: "form-control", placeholder: "ex)오피스텔" %>
+	    	</div>
+	  	</label>
+	  	<label class="input login-input g-mt-20">
+	      <div class="input-group">
+	      	<span class="input-group-addon" style="padding-right: 30px;">주 소</span>
+	      	<%= f.text_field :address, class: "form-control", placeholder: "ex)서울특별시 중구 필동 3가" %>
+	    	</div>
+	  	</label>
+	  	<label class="input login-input g-mt-20">
+	      <div class="input-group">
+	      	<span class="input-group-addon" style="padding-right: 20px;">보증금</span>
+	      	<%= f.text_field :deposit, placeholder: "ex)1000", class: "form-control" %>
+	    	</div>
+	  	</label>
+	  	<label class="input login-input g-mt-20">
+	      <div class="input-group">
+	      	<span class="input-group-addon" style="padding-right: 30px;">월 세</span>
+	      	<%= f.text_field :rent_money, placeholder: "ex)50", class: "form-control" %>
+	    	</div>
+	  	</label>
+	  	<label class="input login-input g-mt-20">
+	      <div class="input-group">
+	      	<span class="input-group-addon" style="padding-right: 20px;">방 사진</span>
+	      	<%= f.file_field :image, class: "form-control" %>
+	    	</div>
+	  	</label>
+	  	<label class="input login-input g-mt-20">
+	      <div class="input-group">
+	      	<span class="input-group-addon">상세정보</span>
+	      	<%= f.text_area :detail,  :maxlength=>"300", :size =>"50", placeholder: "상세정보 : 300자 이내로 작성해주세요", class: "form-control" %>
+	    	</div>
+	  	</label>
+  <div class="row g-mb-20 g-mt-20">
+		<div class="col-md-6 actions">
+		  <%= f.submit "등록하기", class: "btn btn-xl" %>
+		</div>
+		<div class="g-mb-20 col-md-6">
+		  <%= link_to '돌아가기', rooms_path, class: "btn btn-xl" %>
+		</div>
+	</div>
+<% end %>
